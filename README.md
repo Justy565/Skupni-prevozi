@@ -1,7 +1,7 @@
-#Skupni prevozi
-#Iskanje in ponudba prevozov
-#•	Objava prevoza – vozniki lahko enostavno dodajo svojo relacijo in število prostih sedežev.
-#•	Iskanje prevoza – potniki vnesejo svojo lokacijo in ciljno destinacijo ter izberejo ustrezen prevoz.
+Skupni prevozi
+Iskanje in ponudba prevozov
+•	Objava prevoza – vozniki lahko enostavno dodajo svojo relacijo in število prostih sedežev.
+•	Iskanje prevoza – potniki vnesejo svojo lokacijo in ciljno destinacijo ter izberejo ustrezen prevoz.
 #•	Filtri – iskanje prevoza glede na uro odhoda, ceno, vrsto avtomobila in posebne zahteve (glasba, tiha vožnja, hišni ljubljenčki).
 #Redni in enkratni prevozi
 #•	Dnevni prevozi v službo ali šolo – možnost ponavljajočih se voženj za tiste, ki se vsak dan vozijo po isti poti.
