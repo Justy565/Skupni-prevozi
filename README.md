@@ -20,18 +20,18 @@
 •	Sistem sporočil – omogoča hitro komunikacijo med vozniki in potniki za dogovor o podrobnostih.
 •	Preverjeni uporabniki – možnost potrditve identitete in telefonske številke za večjo zanesljivost.
 
-## Plačila in delitev stroškov
+## Stroški
 
 •	Jasen pregled stroškov – vozniki nastavijo ceno prevoza vnaprej, da ni nejasnosti pri plačilu.
 •	Online ali gotovinsko plačilo – možnost izbire načina plačila glede na dogovor med voznikom in potniki.
 •	Samodejna delitev stroškov – aplikacija izračuna, koliko naj vsak potnik prispeva za gorivo in morebitne cestnine.
 
-## Dodatne funkcije in API povezave
+## API 
 
 •	Vremenska napoved – vremenski podatki za lažje načrtovanje poti in prilagoditev vožnje.
 •	OpenTripPlanner API – za izračun poti in povezovanje javnega prevoza.
 
-## Prednosti uporabe carpoolinga
+## Prednosti
 
 •	Prihranek pri stroških goriva in cestninah
 •	Manj prometa in hitrejša vožnja
