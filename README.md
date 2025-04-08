@@ -1,41 +1,94 @@
-# Skupni prevozi
+# Skupni Prevozi – Pametna Aplikacija za Deljenje Voženj
 
+## Opis projekta
 
+**Skupni Prevozi** je mobilna aplikacija, ki povezuje voznike in potnike za vsakodnevne poti – kot so vožnje v šolo, službo ali druga opravila. Namesto da se vsak vozi sam, lahko uporabniki z aplikacijo najdejo sopotnike, zmanjšajo stroške goriva, zmanjšajo promet in prispevajo k manjšemu onesnaževanju. 
 
-# Iskanje in ponudba prevozov
+Aplikacija omogoča iskanje prevozov po kriterijih kot so čas, lokacija, cena, tiha vožnja, prisotnost hišnih ljubljenčkov ipd. Sistem vključuje ocenjevanje, profilne slike, sporočila med uporabniki in povezavo z vremensko napovedjo ter javnim prevozom.
 
-- 	Objava prevoza – vozniki lahko enostavno dodajo svojo relacijo in število prostih sedežev.
-- 	Iskanje prevoza – potniki vnesejo svojo lokacijo in ciljno destinacijo ter izberejo ustrezen prevoz.
-- 	Filtri – iskanje prevoza glede na uro odhoda, ceno, vrsto avtomobila in posebne zahteve (glasba, tiha vožnja, hišni ljubljenčki).
+## Problem, ki ga rešujemo
 
-## Redni in enkratni prevozi
+Vsakodnevne vožnje z avtomobilom pomenijo:
+- Visoke stroške goriva
+- Zastoje na cestah
+- Večje onesnaževanje okolja
+- Nepregledne skupine na družbenih omrežjih, kjer je težko najti zanesljive sopotnike
 
-- 	Dnevni prevozi v službo ali šolo – možnost ponavljajočih se voženj za tiste, ki se vsak dan vozijo po isti poti.
-- 	Občasni prevozi – za izlete, obiskovanje prireditev ali dolge poti, kjer si potniki in vozniki delijo stroške goriva.
-- 	Nujni prevozi – sistem za hitro iskanje prevoza v zadnjem trenutku.
+## Naša rešitev
 
-## Varnost in zanesljivost
+Z aplikacijo Skupni Prevozi:
+- Vozniki objavijo pot (čas, lokacija, cena ipd.)
+- Potniki poiščejo prevoz glede na filtre
+- Vgrajena so orodja za varnost, komunikacijo in personalizacijo
+- Enostaven in pregleden vmesnik, prilagojen tudi mladim uporabnikom
 
-- 	Profil voznika in potnika – vsak uporabnik ima ocene in komentarje preteklih voženj za večjo varnost.
-- 	Sistem sporočil – omogoča hitro komunikacijo med vozniki in potniki za dogovor o podrobnostih.
-- 	Preverjeni uporabniki – možnost potrditve identitete in telefonske številke za večjo zanesljivost.
+## Ciljna skupina
 
-## Stroški
+- Dijaki in študenti (npr. dnevne vožnje v šolo ali na fakulteto)
+- Zaposleni, ki se vozijo v službo iz enega kraja v drugega
+- Ljudje brez avtomobila, ki iščejo cenovno dostopen prevoz
 
-- 	Jasen pregled stroškov – vozniki nastavijo ceno prevoza vnaprej, da ni nejasnosti pri plačilu.
-- 	Online ali gotovinsko plačilo – možnost izbire načina plačila glede na dogovor med voznikom in potniki.
-- 	Samodejna delitev stroškov – aplikacija izračuna, koliko naj vsak potnik prispeva za gorivo in morebitne cestnine.
+## Analiza trga
 
-## API 
+### Velikost trga
+- V Sloveniji je več kot 200.000 dijakov in študentov
+- Anketa med 100 dijaki/študenti:
+  - 65% se dnevno vozi več kot 10 km
+  - 48% bi uporabljalo skupni prevoz, če bi bil zanesljiv
+  - 76% nima dobre povezave z javnim prevozom
 
-- 	Vremenska napoved – vremenski podatki za lažje načrtovanje poti in prilagoditev vožnje.
-- 	OpenTripPlanner API – za izračun poti in povezovanje javnega prevoza.
+Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 
-## Prednosti
+### Konkurenčna analiza
 
-- 	Prihranek pri stroških goriva in cestninah
-- 	Manj prometa in hitrejša vožnja
-- 	Manj onesnaževanja okolja
-- 	Možnost spoznavanja novih ljudi
+| Aplikacija     | Prednosti                   | Slabosti                           | Naša prednost                          |
+|----------------|-----------------------------|------------------------------------|----------------------------------------|
+| BlaBlaCar      | Znana, mednarodna           | Ni primerna za vsakodnevne poti   | Fokus na lokalne in ponavljajoče poti  |
+| Facebook skupine | Enostavna objava          | Nepregledno, ni varnosti           | Ocene, filtri, pregledna aplikacija    |
+| Prevoz.org     | Domač produkt               | Zastarel design, ni mobilne aplikacije | Moderna, varna, napredna aplikacija |
 
+### Unique Selling Proposition (USP)
 
+- Ponavljajoče vožnje (npr. vsak dan ob 7h)
+- Napredno iskanje: tišina, hišni ljubljenčki, klima
+- Ocene, verifikacija in varnostni ukrepi
+- Povezava z javnim prevozom in vremensko napovedjo
+- Enostavna uporaba, mlad dizajn
+
+## SWOT analiza
+
+|                | Močne strani (S)                     | Slabosti (W)                                |
+|----------------|--------------------------------------|---------------------------------------------|
+| **Priložnosti (O)** | - Zeleni prehod<br>- Visoke cene goriva<br>- Podpora občin in šol | - Aplikacija bo na začetku brezplačna<br>- Sodelovanje z javnimi institucijami |
+| **Grožnje (T)**     | - Uber, drugi veliki igralci<br>- Nezaupanje v skupne vožnje<br>- Zakonodaja (GDPR) | - Ocene in verifikacije<br>- Gradimo varno skupnost |
+
+## Poslovni model in finance
+
+### Viri prihodkov
+- **Premium paket za voznike:** 3 €/mesec za dodatne funkcije in vidnost
+- **Provizija na potrjene vožnje:** cca. 0.30 € / prevoz
+- **Lokalno oglaševanje:** avto-oprema, servisi, trgovine
+- **Partnerstva z občinami in podjetji:** za trajnostno mobilnost zaposlenih
+
+### Stroški
+
+| Strošek         | Znesek         |
+|------------------|----------------|
+| Razvoj MVP       | 1.500 €        |
+| Mesečno vzdrževanje | 300 €        |
+| Marketing        | 500 €/mesec    |
+
+### Pridobivanje uporabnikov
+- Promocija po šolah in fakultetah
+- Akcija “Povabi prijatelja” – brezplačen mesec premium
+- Sodelovanje z influencerji in organizacijami
+- Dogodki s sponzoriranimi vožnjami (npr. na festivale)
+
+## Zaključek
+
+**Skupni Prevozi** je rešitev za vsakogar, ki se dnevno vozi in želi:
+- Prihraniti denar in čas
+- Prispevati k bolj čistemu okolju
+- Najti zanesljive sopotnike
+
+Z lokalnim fokusom, napredno tehnologijo in dostopnim dizajnom smo pripravljeni izboljšati vsakodnevne vožnje v Sloveniji in kasneje širše.
