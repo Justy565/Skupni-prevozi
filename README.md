@@ -70,13 +70,7 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 - **Lokalno oglaševanje:** avto-oprema, servisi, trgovine
 - **Partnerstva z občinami in podjetji:** za trajnostno mobilnost zaposlenih
 
-### Stroški
 
-| Strošek         | Znesek         |
-|------------------|----------------|
-| Razvoj MVP       | 1.500 €        |
-| Mesečno vzdrževanje | 300 €        |
-| Marketing        | 500 €/mesec    |
 
 ### Pridobivanje uporabnikov
 - Promocija po šolah in fakultetah
