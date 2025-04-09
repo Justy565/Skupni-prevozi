@@ -1,4 +1,5 @@
-# Skupni Prevozi – Pametna Aplikacija za Deljenje Voženj
+# Skupni Prevozi
+
 
 ## Opis projekta
 
