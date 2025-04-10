@@ -48,7 +48,7 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 | Facebook skupine | Enostavna objava          | Nepregledno, ni varnosti           | Ocene, filtri, pregledna aplikacija    |
 | Prevoz.org     | Domač produkt               | Zastarel design, ni mobilne aplikacije | Moderna, varna, napredna aplikacija |
 
-### Unique Selling Proposition (USP)
+### Prodajna ponudba(USP)
 
 - Ponavljajoče vožnje (npr. vsak dan ob 7h)
 - Napredno iskanje: tišina, hišni ljubljenčki, klima
