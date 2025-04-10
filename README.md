@@ -66,7 +66,7 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 ## Poslovni model in finance
 
 ### Viri prihodkov
-- **Premium paket za voznike:** 3 €/mesec za dodatne funkcije in vidnost
+- **Premium paket za voznike:** 3 €/mesec za dodatne funkcije in možnost plačevanja z gotovino(brez davka)
 - **Provizija na potrjene vožnje:** cca. 0.30 € / prevoz
 - **Lokalno oglaševanje:** avto-oprema, servisi, trgovine
 - **Partnerstva z občinami in podjetji:** za trajnostno mobilnost zaposlenih
