@@ -86,4 +86,4 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 - Prispevati k bolj čistemu okolju
 - Najti zanesljive sopotnike
 
-Z lokalnim fokusom, napredno tehnologijo in dostopnim dizajnom smo pripravljeni izboljšati vsakodnevne vožnje v Sloveniji in kasneje širše.
+
