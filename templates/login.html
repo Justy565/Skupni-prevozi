@@ -9,16 +9,22 @@
 </head>
 
 <body>
-    <h1>Login Page</h1>
-
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
-
-    <a href="{{ url_for('register') }}">Don't have an account? Sign Up</a>
+    {% extends 'base.html' %}
+    {% block title %}Login{% endblock %}
+    {% block content %}
+        <h2>Login</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br><br>
+    
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br><br>
+    
+            {{ form.submit() }}
+        </form>
+    {% endblock %}
+    
 </body>
 
 </html>
