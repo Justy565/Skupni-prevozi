@@ -44,7 +44,7 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 
 | Aplikacija     | Prednosti                   | Slabosti                           | Naša prednost                          |
 |----------------|-----------------------------|------------------------------------|----------------------------------------|
-| BlaBlaCar      | Znana, mednarodna           | Ni primerna za vsakodnevne poti   | Fokus na lokalne in ponavljajoče poti  |
+| BlaBlaCar      | Znana, mednarodna           | Predvsem daljše relacije  | Fokus na lokalne in ponavljajoče poti  |
 | Facebook skupine | Enostavna objava          | Nepregledno, ni varnosti           | Ocene, filtri, pregledna aplikacija    |
 | Prevoz.org     | Domač produkt               | Zastarel design, ni mobilne aplikacije | Moderna, varna, napredna aplikacija |
 
@@ -58,10 +58,11 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 
 ## SWOT analiza
 
-|                | Močne strani (S)                     | Slabosti (W)                                |
-|----------------|--------------------------------------|---------------------------------------------|
-| **Priložnosti (O)** | - Zeleni prehod<br>- Visoke cene goriva<br>- Podpora občin in šol | - Aplikacija bo na začetku brezplačna<br>- Sodelovanje z javnimi institucijami |
-| **Grožnje (T)**     | - Uber, drugi veliki igralci<br>- Nezaupanje v skupne vožnje<br>- Zakonodaja (GDPR) | - Ocene in verifikacije<br>- Gradimo varno skupnost |
+|                | **Močne strani (S)**                                  | **Slabosti (W)**                                               |
+|----------------|-------------------------------------------------------|----------------------------------------------------------------|
+| **Priložnosti (O)** | - Zeleni prehod  <br> - Visoke cene goriva  <br> - Podpora občin in šol      | - Aplikacija bo na začetku brezplačna  <br> - Sodelovanje z javnimi institucijami |
+| **Grožnje (T)**     | - Uber, drugi veliki igralci  <br> - Nezaupanje v skupne vožnje  <br> - Zakonodaja (GDPR) | - Ocene in verifikacije  <br> - Gradimo varno skupnost         |
+
 
 ## Poslovni model in finance
 
