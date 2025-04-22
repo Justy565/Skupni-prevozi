@@ -64,15 +64,31 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+
+        #admin
+        if form.username.data == 'admin' and form.password.data == 'admin123':
+            admin_user = User(user_id=0, username='admin', password='admin123', is_admin=True)
+            login_user(admin_user)
+            print("[INFO] Admin prijavljen prek hardcoded prijave")
+            return redirect(url_for('admin'))
+
+        #normalna
         user_query = Query()
         user = user_table.get(user_query.username == form.username.data)
         if user and bcrypt.check_password_hash(user['password'], form.password.data):
-            user_obj = User(user_id=user['id'], username=user['username'], password=user['password'])
+            user_obj = User(
+                user_id=user['id'],
+                username=user['username'],
+                password=user['password'],
+                is_admin=user.get('is_admin', False)
+            )
             login_user(user_obj)
             return redirect(url_for('index'))
         else:
             form.password.errors.append('Nepravilno uporabniško ime ali geslo')
+
     return render_template('login.html', form=form)
+
 
 
 @app.route('/register', methods=['GET', 'POST'])

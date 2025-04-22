@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+</head>
+<body>
+    <h1>Admin nadzorna plošča</h1>
+    <p>Seznam vseh uporabnikov:</p>
+    <ul>
+        {% for user in users %}
+            <li>ID: {{ user.id }} | Uporabniško ime: {{ user.username }} | Admin: {{ 'Da' if user.is_admin else 'Ne' }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Nazaj</a>
+</body>
+</html>
