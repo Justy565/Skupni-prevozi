@@ -45,7 +45,7 @@ Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
 | Aplikacija     | Prednosti                   | Slabosti                           | Naša prednost                          |
 |----------------|-----------------------------|------------------------------------|----------------------------------------|
 | BlaBlaCar      | Znana, mednarodna           | Predvsem daljše relacije  | Fokus na lokalne in ponavljajoče poti  |
-| Facebook skupine | Enostavna objava          | Nepregledno, ni varnosti           | Ocene, filtri, pregledna aplikacija    |
+| Facebook skupine | Enostavna objava          | Nepregledno          | Ocene, filtri, pregledna aplikacija    |
 | Prevoz.org     | Domač produkt               | Zastarel design, ni mobilne aplikacije | Moderna, varna, napredna aplikacija |
 
 ### Prodajna ponudba(USP)
