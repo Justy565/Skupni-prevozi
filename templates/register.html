@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 <head>
     <meta charset="UTF-8">
     <title>Registracija</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h2>Registracija</h2>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
+    <header>
+        <h1>Registracija</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Domov</a>
+            <a href="{{ url_for('login') }}">Prijava</a>
+        </nav>
+    </header>
+    <main>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            
+            <label for="username">Uporabniško ime</label>
+            {{ form.username }}
             {% for error in form.username.errors %}
-                <span style="color: red;">{{ error }}</span>
+                <div class="alert error">{{ error }}</div>
             {% endfor %}
-        </div>
-        <div>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
+            
+            <label for="password">Geslo</label>
+            {{ form.password }}
             {% for error in form.password.errors %}
-                <span style="color: red;">{{ error }}</span>
+                <div class="alert error">{{ error }}</div>
             {% endfor %}
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
-    <p>Že imaš račun? <a href="{{ url_for('login') }}">Prijava</a></p>
+            
+            {{ form.submit(class="button") }}
+        </form>
+    </main>
 </body>
 </html>
