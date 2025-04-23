@@ -43,7 +43,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)],
                              render_kw={"placeholder": "Enter password"})
     submit = SubmitField('Register')
-
+    #preveri ce uporabnik ze obstaja
     def validate_username(self, username):
         existing_user = user_table.search(Query().username == username.data)
         if existing_user:
@@ -70,19 +70,19 @@ class VoznjaForm(FlaskForm):
 def home():
     return render_template('home.html')
 
-
+#login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
 
-        # Admin
+        # admin
         if form.username.data == 'admin' and form.password.data == 'admin123':
             admin = User(user_id=0, username='admin', password='admin123', is_admin=True)
             login_user(admin)
             return redirect(url_for('admin_nadzor'))
 
-        # Navaden
+        # navaden
         user_query = Query()
         user = user_table.get(user_query.username == form.username.data)
         if user and bcrypt.check_password_hash(user['password'], form.password.data):
@@ -99,7 +99,7 @@ def login():
 
     return render_template('login.html', form=form)
 
-
+#registracija
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -110,13 +110,13 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
+#glavna stran po prijavi
 @app.route('/index')
 @login_required
 def index():
     return render_template('index.html')
 
-
+#dodajanje novih vozenj
 @app.route('/dodaj_voznjo', methods=['GET', 'POST'])
 @login_required
 def dodaj_voznjo():
@@ -131,21 +131,21 @@ def dodaj_voznjo():
         return redirect(url_for('moje_voznje'))
     return render_template('dodaj_voznjo.html', form=form)
 
-
+#pregled svojih vozenj
 @app.route('/moje_voznje')
 @login_required
 def moje_voznje():
     user_voznje = voznje_table.search(Query().user_id == current_user.id)
     return render_template('moje_voznje.html', voznje=user_voznje)
 
-
+#logout
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
-
+#admin nadzorna
 @app.route('/admin')
 @login_required
 def admin_nadzor():
