@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Prijava</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <header>
@@ -15,21 +15,13 @@
     </header>
     <main>
         <form method="POST">
-            {{ form.hidden_tag() }}
-            
-            <label for="username">Uporabniško ime</label>
-            {{ form.username }}
-            {% for error in form.username.errors %}
-                <div class="alert error">{{ error }}</div>
-            {% endfor %}
-            
-            <label for="password">Geslo</label>
-            {{ form.password }}
-            {% for error in form.password.errors %}
-                <div class="alert error">{{ error }}</div>
-            {% endfor %}
-            
-            {{ form.submit(class="button") }}
+            <label for="username">Uporabniško ime</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Geslo</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <input type="submit" value="Prijava">
         </form>
     </main>
 </body>
