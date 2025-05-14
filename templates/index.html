@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Moje vožnje</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Moje vožnje</h1>
+        <nav>
+            <a href="{{ url_for('dodaj_voznjo') }}">Dodaj vožnjo</a>
+            <a href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
+            <a href="{{ url_for('logout') }}">Odjava</a>
+        </nav>
+    </header>
+    <main>
+        <p>Seznam vaših voženj:</p>
+
+        {% if voznje %}
+            <ul>
+                {% for voznja in voznje %}
+                    <li>
+                       {{ voznja['zacetek'] }} – {{ voznja['destinacija'] }} – {{ voznja['datum'] }} – {{ voznja['sedezi'] }} mest
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Trenutno še nimate vnešenih voženj.</p>
+        {% endif %}
+    </main>
+</body>
+</html>

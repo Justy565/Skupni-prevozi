@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj vožnjo</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dodaj vožnjo</h1>
+        <nav>
+            <a href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
+            <a href="{{ url_for('logout') }}">Odjava</a>
+        </nav>
+    </header>
+    <main>
+        <form method="POST">         
+            Začetek:<input type="text" id="zacetek" name="zacetek" required><br><br>
+            Destinacija:<input type="text" id="destinacija" name="destinacija" required><br><br>            
+            Datum:<input type="date" id="datum" name="datum" required><br><br>
+            Št. mest:<input type="number" id="sedezi" name="sedezi" required><br><br>
+            <input type="submit" value="Dodaj vožnjo">
+        </form>
+    </main>
+</body>
+</html>
