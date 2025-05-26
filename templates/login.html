@@ -22,7 +22,7 @@
             <label for="password">Geslo</label><br>
             <input type="password" id="password" name="password" required><br><br>
 
-            <button onclick="login()">Gumb</button>
+            <button onclick="login()">Prijavi se</button>
       
     </main>
      <script>
@@ -48,7 +48,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {
-                        window.location.href = '/';
+                        window.location.href = '/index';
                     } else{
                         errorMessage.textContent = response.error;
                         errorMessage.style.display = 'block';   

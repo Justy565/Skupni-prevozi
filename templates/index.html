@@ -3,31 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Moje vožnje</title>
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Moje vožnje</h1>
+        <h1>Dobrodošel, {{ session['username'] }}!</h1>
         <nav>
             <a href="{{ url_for('dodaj_voznjo') }}">Dodaj vožnjo</a>
-            <a href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
+            <a href="{{ url_for('index') }}">Moje vožnje</a>
+            <a href="{{ url_for('vse_voznje') }}">Vožnje drugih</a>
             <a href="{{ url_for('logout') }}">Odjava</a>
         </nav>
     </header>
     <main>
         <p>Seznam vaših voženj:</p>
-
-        {% if voznje %}
-            <ul>
-                {% for voznja in voznje %}
-                    <li>
-                       {{ voznja['zacetek'] }} – {{ voznja['destinacija'] }} – {{ voznja['datum'] }} – {{ voznja['sedezi'] }} mest
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Trenutno še nimate vnešenih voženj.</p>
-        {% endif %}
+        <div id="voznje-container">
+            <p>Nalaganje voženj...</p>
+        </div>
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/api/moje_voznje')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('voznje-container');
+                    container.innerHTML = ''; // Počisti prejšnje
+
+                    if (data.success && data.voznje.length > 0) {
+                        const list = document.createElement('ul');
+                        data.voznje.forEach(v => {
+                            const item = document.createElement('li');
+                            item.textContent = `${v.zacetek} – ${v.destinacija} – ${v.datum} – ${v.sedezi} mest`;
+                            list.appendChild(item);
+                        });
+                        container.appendChild(list);
+                    } else {
+                        container.innerHTML = '<p>Trenutno še nimate vnešenih voženj.</p>';
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('voznje-container').innerHTML = '<p>Napaka pri nalaganju voženj.</p>';
+                    console.error(err);
+                });
+        });
+    </script>
 </body>
 </html>

@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
-app.secret_key = 'osnovni_secret'
+app.secret_key = 'fortnite'
 
 db = TinyDB('db.json')
 user_table = db.table('users')
@@ -14,6 +14,8 @@ voznje_table = db.table('voznje')
 #osnovna stran
 @app.route('/')
 def home():
+    if 'user_id' in session:
+        return redirect(url_for('index'))
     return render_template('home.html')
 
 #registracija
@@ -52,6 +54,7 @@ def login():
             if user:
                 if user[0]['password'] == password:
                     session['username'] = username
+                    session['user_id'] = user[0].doc_id 
                     return jsonify({'success': True})
                 else:
                     return jsonify({'success': False, 'error': 'Wrong password'})
@@ -62,12 +65,15 @@ def login():
             return jsonify({'success': False, 'error': 'Prišlo je do napake'})
     return render_template("login.html")
 
+
 #glavna stran
 @app.route('/index')
 def index():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    return f"Pozdravljen {session['username']}! <a href='/dodaj_voznjo'>Dodaj vožnjo</a> | <a href='/moje_voznje'>Moje vožnje</a> | <a href='/logout'>Odjava</a>"
+    return render_template('index.html')
+
+
 
 #dodaj voznje
 @app.route('/dodaj_voznjo', methods=['GET', 'POST'])
@@ -89,6 +95,14 @@ def dodaj_voznjo():
         return redirect(url_for('moje_voznje'))
     return render_template('dodaj_voznjo.html')
 
+@app.route('/api/moje_voznje')
+def api_moje_voznje():
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'error': 'Ni prijave'}), 401
+    moje = voznje_table.search(Query().user_id == session['user_id'])
+    return jsonify({'success': True, 'voznje': moje})
+
+
 #pregled svojih vozenj
 @app.route('/moje_voznje')
 def moje_voznje():
@@ -96,6 +110,15 @@ def moje_voznje():
         return redirect(url_for('login'))
     moje = voznje_table.search(Query().user_id == session['user_id'])
     return render_template('moje_voznje.html', voznje=moje)
+
+@app.route('/vse_voznje')
+def vse_voznje():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    User = Query()
+    vse = voznje_table.search(User.user_id != session['user_id'])
+    return render_template('vse_voznje.html', voznje=vse)
 
 #odjava
 @app.route('/logout')
