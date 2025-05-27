@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dodaj vožnjo</title>
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
@@ -14,13 +14,30 @@
         </nav>
     </header>
     <main>
-        <form method="POST">         
-            Začetek:<input type="text" id="zacetek" name="zacetek" required><br><br>
-            Destinacija:<input type="text" id="destinacija" name="destinacija" required><br><br>            
-            Datum:<input type="date" id="datum" name="datum" required><br><br>
-            Št. mest:<input type="number" id="sedezi" name="sedezi" required><br><br>
-            <input type="submit" value="Dodaj vožnjo">
+        <form id="voznjaForm">
+            <input name="zacetek" placeholder="Začetek" required>
+            <input name="destinacija" placeholder="Destinacija" required>
+            <input type="date" name="datum" required>
+            <input type="time" name="cas" required>
+            <input type="number" name="cena" placeholder="Cena (€)" required>
+            <input type="number" name="sedezi" placeholder="Sedeži" required>
+            <button type="submit">Dodaj</button>
         </form>
+        <p id="status"></p>
     </main>
+
+    <script>
+        document.getElementById('voznjaForm').onsubmit = async e => {
+            e.preventDefault();
+            const podatki = Object.fromEntries(new FormData(e.target));
+            const res = await fetch('{{ url_for("dodaj_voznjo") }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(podatki)
+            });
+            const json = await res.json();
+            document.getElementById('status').textContent = json.success ? "Vožnja dodana!" : "Napaka: " + json.error;
+        };
+    </script>
 </body>
 </html>

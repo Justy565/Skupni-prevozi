@@ -79,20 +79,21 @@ def index():
 @app.route('/dodaj_voznjo', methods=['GET', 'POST'])
 def dodaj_voznjo():
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return jsonify({'success': False, 'error': 'Nisi prijavljen'}), 401
+
     if request.method == 'POST':
-        zacetek = request.form.get('zacetek')
-        destinacija = request.form.get('destinacija')
-        datum = request.form.get('datum')
-        sedezi = request.form.get('sedezi')
+        data = request.get_json()
         voznje_table.insert({
             'user_id': session['user_id'],
-            'zacetek': zacetek,
-            'destinacija': destinacija,
-            'datum': datum,
-            'sedezi': sedezi
+            'zacetek': data['zacetek'],
+            'destinacija': data['destinacija'],
+            'datum': data['datum'],
+            'cas': data['cas'],
+            'cena': data['cena'],
+            'sedezi': data['sedezi']
         })
-        return redirect(url_for('moje_voznje'))
+        return jsonify({'success': True})
+
     return render_template('dodaj_voznjo.html')
 
 @app.route('/api/moje_voznje')
