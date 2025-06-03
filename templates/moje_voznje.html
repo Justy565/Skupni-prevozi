@@ -4,26 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moje vožnje</title>
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f6f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .voznja {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .voznja-info {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .voznja button {
+            background: #e53935;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .voznja button:hover {
+            background: #c62828;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2196f3;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Moje vožnje</h2>
-    
-    <ul>
-        {% if voznje %}
-            {% for voznja in voznje %}
-                <li>
-                    Začetek: {{voznja['zacetek']}}
-                    Destinacija: {{ voznja['destinacija'] }} |
-                    Datum: {{ voznja['datum'] }} |
-                    Št. mest: {{ voznja['sedezi'] }}
-                </li>
-            {% endfor %}
-        {% else %}
-            <li>Ni voženj.</li>
-        {% endif %}
-    </ul>
+    <h2>Izbris</h2>
 
-    <a href="{{ url_for('index') }}">Nazaj</a>
+    {% if voznje %}
+        {% for voznja in voznje %}
+            <div class="voznja">
+                <div class="voznja-info">
+                    {{ voznja['zacetek'] }} → {{ voznja['destinacija'] }}<br>
+                    Datum: {{ voznja['datum'] }} ob {{ voznja['cas'] }}<br>
+                    Cena: €{{ voznja['cena'] }} | Št. mest: {{ voznja['sedezi'] }}
+                </div>
+                <button onclick="izbrisiVoznjo({{ voznja.doc_id }})">Izbriši</button>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Ni dodanih voženj.</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">← Nazaj</a>
+
+    <script>
+        async function izbrisiVoznjo(id) {
+            if (!confirm("Ali res želiš izbrisati to vožnjo?")) return;
+            const res = await fetch(`/izbrisi_voznjo/${id}`, {
+                method: 'POST'
+            });
+            const json = await res.json();
+            if (json.success) {
+                location.reload();
+            } else {
+                alert("Napaka: " + json.error);
+            }
+        }
+    </script>
 </body>
 </html>

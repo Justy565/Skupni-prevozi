@@ -9,7 +9,7 @@
     <header>
         <h1>Dodaj vožnjo</h1>
         <nav>
-            <a href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
+            <a href="{{ url_for('moje_voznje') }}">Izbris vozenj</a>
             <a href="{{ url_for('logout') }}">Odjava</a>
         </nav>
     </header>
@@ -21,6 +21,7 @@
             <input type="time" name="cas" required>
             <input type="number" name="cena" placeholder="Cena (€)" required>
             <input type="number" name="sedezi" placeholder="Sedeži" required>
+            <input type="phonenumber" name="telefonska" placeholder="Telefonska številka" required>
             <button type="submit">Dodaj</button>
         </form>
         <p id="status"></p>

@@ -90,7 +90,8 @@ def dodaj_voznjo():
             'datum': data['datum'],
             'cas': data['cas'],
             'cena': data['cena'],
-            'sedezi': data['sedezi']
+            'sedezi': data['sedezi'],
+            'telefonska': data['telefonska']
         })
         return jsonify({'success': True})
 
@@ -120,6 +121,22 @@ def vse_voznje():
     User = Query()
     vse = voznje_table.search(User.user_id != session['user_id'])
     return render_template('vse_voznje.html', voznje=vse)
+
+@app.route('/izbrisi_voznjo/<int:voznja_id>', methods=['POST'])
+def izbrisi_voznjo(voznja_id):
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'error': 'Nisi prijavljen'}), 401
+
+    voznja = voznje_table.get(doc_id=voznja_id)
+    if not voznja:
+        return jsonify({'success': False, 'error': 'Vožnja ne obstaja'})
+
+    if voznja['user_id'] != session['user_id']:
+        return jsonify({'success': False, 'error': 'Dostop zavrnjen'}), 403
+
+    voznje_table.remove(doc_ids=[voznja_id])
+    return jsonify({'success': True})
+
 
 #odjava
 @app.route('/logout')

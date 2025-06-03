@@ -34,7 +34,13 @@
                         const list = document.createElement('ul');
                         data.voznje.forEach(v => {
                             const item = document.createElement('li');
-                            item.textContent = `${v.zacetek} – ${v.destinacija} – ${v.datum} – ${v.sedezi} mest`;
+                            item.innerHTML = `
+                                <strong>${v.zacetek}</strong> → <strong>${v.destinacija}</strong><br>
+                                Datum: ${v.datum}<br>
+                                Sedeži: ${v.sedezi}<br>
+                                Cena: ${v.cena ?? 'ni določeno'} €<br>
+                                Telefon: ${v.telefonska ?? 'ni vnešena'}
+                            `;
                             list.appendChild(item);
                         });
                         container.appendChild(list);

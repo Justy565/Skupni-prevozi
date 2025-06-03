@@ -1,90 +1,113 @@
-# Skupni Prevozi
+# Skupni prevozi – Platforma za deljenje prevozov
 
+## POSLOVNI DEL (30%)
 
-## Opis projekta
+### 1. Identifikacija problema in opis rešitve (5 točk)
 
-**Skupni Prevozi** je mobilna aplikacija, ki povezuje voznike in potnike za vsakodnevne poti – kot so vožnje v šolo, službo ali druga opravila. Namesto da se vsak vozi sam, lahko uporabniki z aplikacijo najdejo sopotnike, zmanjšajo stroške goriva, zmanjšajo promet in prispevajo k manjšemu onesnaževanju. 
+**Problem:**  
+Veliko ljudi se vsak dan vozi na podobne relacije (služba, šola, dogodki), vendar avtomobile pogosto uporabljajo sami. To povzroča prometne zastoje, povečano porabo goriva in dodatne stroške.
 
-Aplikacija omogoča iskanje prevozov po kriterijih kot so čas, lokacija, cena, tiha vožnja, prisotnost hišnih ljubljenčkov ipd. Sistem vključuje ocenjevanje, profilne slike, sporočila med uporabniki in povezavo z vremensko napovedjo ter javnim prevozom.
+**Rešitev:**  
+Skupni prevozi je spletna aplikacija, ki omogoča uporabnikom, da objavijo svoje vožnje in jih delijo z drugimi. S tem se zmanjšajo stroški prevoza, poveča ekološka učinkovitost in spodbuja sodelovanje med uporabniki.
 
-## Problem, ki ga rešujemo
+**Ciljna skupina:**  
+Dijaki, študenti, zaposleni in vsi, ki redno opravljajo podobne poti in želijo prihraniti pri prevozu.
 
-Vsakodnevne vožnje z avtomobilom pomenijo:
-- Visoke stroške goriva
-- Zastoje na cestah
-- Večje onesnaževanje okolja
-- Nepregledne skupine na družbenih omrežjih, kjer je težko najti zanesljive sopotnike
+---
 
-## Naša rešitev
+### 2. Analiza trga (5 točk)
 
-Z aplikacijo Skupni Prevozi:
-- Vozniki objavijo pot (čas, lokacija, cena ipd.)
-- Potniki poiščejo prevoz glede na filtre
-- Vgrajena so orodja za varnost, komunikacijo in personalizacijo
-- Enostaven in pregleden vmesnik, prilagojen tudi mladim uporabnikom
+**Velikost trga:**  
+Veliko ljudi se dnevno vozi na podobne lokacije, kar predstavlja veliko priložnost za uporabo takšne platforme.
 
-## Ciljna skupina
+**Konkurenčna analiza:**
 
-- Dijaki in študenti (npr. dnevne vožnje v šolo ali na fakulteto)
-- Zaposleni, ki se vozijo v službo iz enega kraja v drugega
-- Ljudje brez avtomobila, ki iščejo cenovno dostopen prevoz
+- **Obstoječe rešitve:** BlaBlaCar, prevozi.org  
+- **Prednosti Skupni prevozi:** Enostaven uporabniški vmesnik, ni potrebe po registraciji z osebnimi podatki tretjih strani, fokusirano na lokalne prevoze.  
+- **Slabosti konkurentov:** Kompleksnejši postopki, manj primeren za vsakodnevne poti.
 
-## Analiza trga
+---
 
-### Velikost trga
-- V Sloveniji je več kot 200.000 dijakov in študentov
-- Anketa med 100 dijaki/študenti:
-  - 65% se dnevno vozi več kot 10 km
-  - 48% bi uporabljalo skupni prevoz, če bi bil zanesljiv
-  - 76% nima dobre povezave z javnim prevozom
+### 3. SWOT analiza (5 točk)
 
-Potencialno: več kot 100.000 aktivnih uporabnikov samo v Sloveniji.
+**PREDNOSTI (S):**
+- Enostavno dodajanje in iskanje voženj
+- Uporabniški sistem z možnostjo vpogleda v lastne in tuje vožnje
+- Pregleden vmesnik
 
-### Konkurenčna analiza
+**SLABOSTI (W):**
+- Trenutno ni sistema za ocenjevanje voznikov/sopotnikov
+- Brez integracije z zemljevidi
 
-| Aplikacija     | Prednosti                   | Slabosti                           | Naša prednost                          |
-|----------------|-----------------------------|------------------------------------|----------------------------------------|
-| BlaBlaCar      | Znana, mednarodna           | Predvsem daljše relacije  | Fokus na lokalne in ponavljajoče poti  |
-| Facebook skupine | Enostavna objava          | Nepregledno          | Ocene, filtri, pregledna aplikacija    |
-| Prevoz.org     | Domač produkt               | Zastarel design, ni mobilne aplikacije | Moderna, varna, napredna aplikacija |
+**PRILOŽNOSTI (O):**
+- Možnost integracije z mobilno aplikacijo ali obvestili
+- Razširitev na šole, podjetja, dogodke
 
-### Prodajna ponudba(USP)
+**GROŽNJE (T):**
+- Konkurenčne platforme z večjim dosegom
+- Potencialni pomisleki glede zasebnosti in varnosti
 
-- Ponavljajoče vožnje (npr. vsak dan ob 7h)
-- Napredno iskanje: tišina, hišni ljubljenčki, klima
-- Ocene, verifikacija in varnostni ukrepi
-- Povezava z javnim prevozom in vremensko napovedjo
-- Enostavna uporaba, mlad dizajn
+---
 
-## SWOT analiza
+### 4. Poslovni model in finančni plan (5 točk)
 
-|                | **Močne strani (S)**                                  | **Slabosti (W)**                                               |
-|----------------|-------------------------------------------------------|----------------------------------------------------------------|
-| **Priložnosti (O)** | - Zeleni prehod  <br> - Visoke cene goriva  <br> - Podpora občin in šol      | - Aplikacija bo na začetku brezplačna  <br> - Sodelovanje z javnimi institucijami |
-| **Grožnje (T)**     | - Uber, drugi veliki igralci  <br> - Nezaupanje v skupne vožnje  <br> - Zakonodaja (GDPR) | - Ocene in verifikacije  <br> - Gradimo varno skupnost         |
+**Prihodki:**
+- Aplikacija je brezplačna, v prihodnosti možna uvedba oglaševanja ali naročnin za dodatne funkcije (npr. prioritetno prikazovanje voženj).
 
+**Stroški:**
+- Gostovanje, razvoj, vzdrževanje aplikacije
+- Morebitna promocija na dogodkih ali socialnih omrežjih
 
-## Poslovni model in finance
+**Strategija pridobivanja uporabnikov:**
+- Promocija med študenti, šolami, skupnostmi in na forumih
+- Sodelovanje z organizatorji dogodkov ali šolami za spodbujanje uporabe
 
-### Viri prihodkov
-- **Premium paket za voznike:** 3 €/mesec za dodatne funkcije in možnost plačevanja z gotovino(brez davka)
-- **Provizija na potrjene vožnje:** cca. 0.30 € / prevoz
-- **Lokalno oglaševanje:** avto-oprema, servisi, trgovine
-- **Partnerstva z občinami in podjetji:** za trajnostno mobilnost zaposlenih
+---
 
+### 5. Pitch predstavitev (10 točk)
 
+Predstavitev bo prikazala, kako lahko uporabnik doda svojo vožnjo, pregleda vožnje drugih in kontaktira sopotnike. Poudarek bo na enostavni uporabi, varčnosti in ekološki vrednosti.
 
-### Pridobivanje uporabnikov
-- Promocija po šolah in fakultetah
-- Akcija “Povabi prijatelja” – brezplačen mesec premium
-- Sodelovanje z influencerji in organizacijami
-- Dogodki s sponzoriranimi vožnjami (npr. na festivale)
+---
+
+## TEHNIČNI DEL (70%)
+
+### 1. Flask osnove (15 točk)
+
+- Uporaba Flask frameworka z dobro strukturo projekta (views, templates, static, forms)
+- Prijava, registracija, odjava in zaščita poti (login required)
+- Predloge ustvarjene z Jinja templating sistemom
+- Posamezne HTML strani (moje vožnje, vse vožnje, dodaj vožnjo)
+- Obvladovanje napak (npr. neprijavljen dostop)
+
+---
+
+### 2. Uporabniški sistem (20 točk)
+
+- Registracija, prijava in odjava z uporabo sej (session)
+- Preverjanje edinstvenosti uporabniškega imena
+- Validacija obrazcev (npr. prazna polja)
+- Sejni sistem preprečuje dostop neavtentificiranim uporabnikom
+
+---
+
+### 3. Interakcija z bazo (25 točk)
+
+- Uporaba TinyDB za shranjevanje uporabnikov in voženj
+- Možnost dodajanja voženj s podatki (začetek, destinacija, datum, ura, cena, telefonska)
+- Prikaz samo svojih ali tujih voženj
+- Odstranjevanje lastnih voženj (z zaščito pred brisanjem tujih)
+
+---
+
+### 4. API in AJAX (10 točk)
+
+- API endpoint za `GET /api/moje_voznje`, ki vrača uporabnikove vožnje v JSON formatu
+- AJAX uporabljen na strani za dinamično nalaganje voženj (brez ponovnega nalaganja strani)
+- Prikaz napak (npr. če ni voženj ali je napaka pri klicu)
+
+---
 
 ## Zaključek
 
-**Skupni Prevozi** je rešitev za vsakogar, ki se dnevno vozi in želi:
-- Prihraniti denar in čas
-- Prispevati k bolj čistemu okolju
-- Najti zanesljive sopotnike
-
-
+Skupni prevozi omogočajo uporabnikom enostavno objavo in iskanje prevozov, s čimer prispevajo k varčevanju, večji povezanosti in ekološki ozaveščenosti. Projekt združuje sodoben spletni razvoj z uporabno rešitvijo za vsakodnevne potrebe.

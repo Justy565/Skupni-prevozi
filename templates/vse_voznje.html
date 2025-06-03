@@ -20,8 +20,12 @@
             <ul>
                 {% for voznja in voznje %}
                     <li>
-                        {{ voznja['zacetek'] }} → {{ voznja['destinacija'] }} dne {{ voznja['datum'] }} ({{ voznja['sedezi'] }} sedežev)
+                        <strong>{{ voznja['zacetek'] }}</strong> → <strong>{{ voznja['destinacija'] }}</strong> dne <strong>{{ voznja['datum'] }}</strong><br>
+                        Št. sedežev: {{ voznja['sedezi'] }}<br>
+                        Cena: <strong>{{ voznja['cena'] }} €</strong><br>
+                        Telefon: <strong>{{ voznja['telefonska'] }}</strong>
                     </li>
+                    <hr>
                 {% endfor %}
             </ul>
         {% else %}
