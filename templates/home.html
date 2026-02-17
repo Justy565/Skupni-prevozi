@@ -1,20 +1,45 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <title>Domov</title>
-    <link rel="stylesheet" href="static/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Dobrodošli!</h1>
-        <nav>
-            <a href="{{ url_for('login') }}">Prijava</a>
-            <a href="{{ url_for('register') }}">Registracija</a>
-        </nav>
-    </header>
-    <main>
-        <p>Dobrodošli na naši spletni strani. Prijavite se ali se registrirajte za nadaljevanje.</p>
-    </main>
-</body>
-</html>
+{% extends "_layout.html" %}
+{% set title = "Skupni prevozi" %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-content">
+      <h1>Najdi ali ponudi prevoz — hitro in enostavno.</h1>
+      <p>
+        Dogovori se za skupno vožnjo, deli stroške in prihrani čas.
+        Objavi svojo vožnjo ali preveri vožnje drugih uporabnikov.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('register') }}">Začni zdaj</a>
+        <a class="btn btn-ghost" href="{{ url_for('login') }}">Imam račun</a>
+      </div>
+
+      <div class="hero-note">Brez kompliciranja • V nekaj klikih • Kontakt takoj</div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap features-grid">
+    <div class="feature-card">
+      <h3>Tvoj prevoz</h3>
+      <p>Dodaj vožnjo z začetkom, destinacijo, datumom, ceno in številom sedežev.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Hitro najdeš</h3>
+      <p>Preglej vožnje drugih uporabnikov in izberi tisto, ki ti najbolj ustreza.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Kontakt takoj</h3>
+      <p>Vidna telefonska številka omogoča hiter dogovor brez nepotrebnih korakov.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

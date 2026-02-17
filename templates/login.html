@@ -1,67 +1,61 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <title>Prijava</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <header>
-        <h1>Prijava</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Domov</a>
-            <a href="{{ url_for('register') }}">Registracija</a>
-        </nav>
-    </header>
-    <main>
-        <div id="error-message"></div>
-            <label for="username">Uporabniško ime</label><br>
-            <input type="text" id="username" name="username" required><br><br>
+{% extends "_layout.html" %}
+{% set title = "Prijava – Skupni prevozi" %}
 
-            <label for="password">Geslo</label><br>
-            <input type="password" id="password" name="password" required><br><br>
+{% block content %}
+<section class="page">
+  <div class="wrap">
+    <div class="card form-card">
+      <h2>Prijava</h2>
+      <p class="muted">Vpiši svoje podatke za nadaljevanje.</p>
 
-            <button onclick="login()">Prijavi se</button>
-      
-    </main>
-     <script>
+      <div id="error-message" class="alert error" style="display:none;"></div>
 
-        function login() {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const errorMessage = document.getElementById('error-message');
+      <label for="username">Uporabniško ime</label>
+      <input type="text" id="username" name="username" autocomplete="username" required>
 
-            if (username === '' || password === '') {
-                errorMessage.textContent = 'Username and password are neccessary!';
-                errorMessage.style.display = 'block';
-                return;
-            }
+      <label for="password">Geslo</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
 
-            $.ajax({
-                url: '/login',
-                type: 'POST',
-                data: {
-                    username: username,
-                    password: password
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success) {
-                        window.location.href = '/index';
-                    } else{
-                        errorMessage.textContent = response.error;
-                        errorMessage.style.display = 'block';   
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error: ', xhr.responseText)
-                    errorMessage.textContent = 'An error occured. Try again.'
-                    errorMessage.style.display = 'block'
-                }
-            });
-        }
+      <button class="btn-block" onclick="login()">Prijavi se</button>
 
-    </script>
-</body>
-</html>
+      <p class="muted small">
+        Nimaš računa? <a href="{{ url_for('register') }}">Registriraj se</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function login() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorMessage = document.getElementById('error-message');
+
+  if (!username || !password) {
+    errorMessage.textContent = 'Uporabniško ime in geslo sta obvezna!';
+    errorMessage.style.display = 'block';
+    return;
+  }
+
+  $.ajax({
+    url: '/login',
+    type: 'POST',
+    data: { username, password },
+    dataType: 'json',
+    success: function(res) {
+      if (res.success) window.location.href = '/index';
+      else {
+        errorMessage.textContent = res.error || 'Napaka';
+        errorMessage.style.display = 'block';
+      }
+    },
+    error: function(xhr) {
+      errorMessage.textContent = 'Prišlo je do napake. Poskusi znova.';
+      errorMessage.style.display = 'block';
+      console.error(xhr.responseText);
+    }
+  });
+}
+</script>
+{% endblock %}

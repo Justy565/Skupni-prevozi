@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ title if title else "Skupni prevozi" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+
+    <a class="brand" href="{{ url_for('home') }}">
+      <img class="brand-logo" src="{{ url_for('static', filename='logo.png') }}" alt="Skupni prevozi">
+      <span class="brand-name">Skupni prevozi</span>
+    </a>
+
+    <!-- Mobile menu button -->
+    <button class="menu-btn" id="menuBtn" aria-label="Odpri meni">☰</button>
+
+    <nav class="topnav" id="topNav">
+      {% if session.get('user_id') %}
+        <a class="topnav-link" href="{{ url_for('index') }}">Domov</a>
+        <a class="topnav-link" href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
+        <a class="topnav-link" href="{{ url_for('vse_voznje') }}">Vožnje drugih</a>
+        <a class="topnav-link topnav-cta" href="{{ url_for('dodaj_voznjo') }}">Dodaj vožnjo</a>
+        <a class="topnav-link" href="{{ url_for('logout') }}">Odjava</a>
+      {% else %}
+        <a class="topnav-link" href="{{ url_for('login') }}">Prijava</a>
+        <a class="topnav-link topnav-cta" href="{{ url_for('register') }}">Registracija</a>
+      {% endif %}
+    </nav>
+
+  </div>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span class="muted">© {{ datetime.utcnow().year }} Skupni prevozi</span>
+  </div>
+</footer>
+
+<script>
+  // simple responsive menu
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('topNav');
+  if (btn && nav) {
+    btn.addEventListener('click', () => nav.classList.toggle('open'));
+  }
+</script>
+
+</body>
+</html>

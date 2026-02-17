@@ -1,67 +1,61 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <title>Registracija</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-<body>
-    <header>
-        <h1>Registracija</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Domov</a>
-            <a href="{{ url_for('login') }}">Prijava</a>
-        </nav>
-    </header>
-    <main>
-            <div id="error-message"></div>
-            Uporabniško ime: <input type="text" id="username" name="username" required><br><br>
-            Geslo: <input type="password" id="password" name="password" required><br><br>
-            <button onclick="register()">Gumb</button>
-        
+{% extends "_layout.html" %}
+{% set title = "Registracija – Skupni prevozi" %}
 
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
-    </main>
-    <script>
-        
-        function register() {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const errorMessage = document.getElementById('error-message');
+{% block content %}
+<section class="page">
+  <div class="wrap">
+    <div class="card form-card">
+      <h2>Registracija</h2>
+      <p class="muted">Ustvari račun in začni uporabljati storitev.</p>
 
-            if (username === '' || password === '') {
-                errorMessage.textContent = 'Username and password are neccessary!';
-                errorMessage.style.display = 'block';
-                return;
-            }
+      <div id="error-message" class="alert error" style="display:none;"></div>
 
-            $.ajax({
-                url: '/register',
-                type: 'POST',
-                data: {
-                    username: username,
-                    password: password
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success) {
-                        window.location.href = '/login';
-                    } else{
-                        errorMessage.textContent = response.error;
-                        errorMessage.style.display = 'block';   
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error: ', xhr.responseText)
-                    errorMessage.textContent = 'An error occured. Try again.'
-                    errorMessage.style.display = 'block'
-                }
-            });
-        }
+      <label for="username">Uporabniško ime</label>
+      <input type="text" id="username" name="username" autocomplete="username" required>
 
-    </script>
-</body>
-</html>
+      <label for="password">Geslo</label>
+      <input type="password" id="password" name="password" autocomplete="new-password" required>
+
+      <button class="btn-block" onclick="register()">Registriraj</button>
+
+      <p class="muted small">
+        Že imaš račun? <a href="{{ url_for('login') }}">Prijavi se</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+function register() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorMessage = document.getElementById('error-message');
+
+  if (!username || !password) {
+    errorMessage.textContent = 'Uporabniško ime in geslo sta obvezna!';
+    errorMessage.style.display = 'block';
+    return;
+  }
+
+  $.ajax({
+    url: '/register',
+    type: 'POST',
+    data: { username, password },
+    dataType: 'json',
+    success: function(res) {
+      if (res.success) window.location.href = '/login';
+      else {
+        errorMessage.textContent = res.error || 'Napaka';
+        errorMessage.style.display = 'block';
+      }
+    },
+    error: function(xhr) {
+      errorMessage.textContent = 'Prišlo je do napake. Poskusi znova.';
+      errorMessage.style.display = 'block';
+      console.error(xhr.responseText);
+    }
+  });
+}
+</script>
+{% endblock %}

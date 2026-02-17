@@ -1,44 +1,79 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj vožnjo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Dodaj vožnjo</h1>
-        <nav>
-            <a href="{{ url_for('moje_voznje') }}">Izbris vozenj</a>
-            <a href="{{ url_for('logout') }}">Odjava</a>
-        </nav>
-    </header>
-    <main>
-        <form id="voznjaForm">
-            <input name="zacetek" placeholder="Začetek" required>
-            <input name="destinacija" placeholder="Destinacija" required>
-            <input type="date" name="datum" required>
-            <input type="time" name="cas" required>
-            <input type="number" name="cena" placeholder="Cena (€)" required>
-            <input type="number" name="sedezi" placeholder="Sedeži" required>
-            <input type="phonenumber" name="telefonska" placeholder="Telefonska številka" required>
-            <button type="submit">Dodaj</button>
-        </form>
-        <p id="status"></p>
-    </main>
+{% extends "_layout.html" %}
+{% set title = "Dodaj vožnjo – Skupni prevozi" %}
 
-    <script>
-        document.getElementById('voznjaForm').onsubmit = async e => {
-            e.preventDefault();
-            const podatki = Object.fromEntries(new FormData(e.target));
-            const res = await fetch('{{ url_for("dodaj_voznjo") }}', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(podatki)
-            });
-            const json = await res.json();
-            document.getElementById('status').textContent = json.success ? "Vožnja dodana!" : "Napaka: " + json.error;
-        };
-    </script>
-</body>
-</html>
+{% block content %}
+<section class="page">
+  <div class="wrap">
+    <div class="card form-card wide">
+      <h2>Dodaj vožnjo</h2>
+      <p class="muted">Izpolni podatke in shrani. Po uspehu te preusmeri na “Moje vožnje”.</p>
+
+      <form id="voznjaForm">
+        <div class="form-grid">
+          <div>
+            <label>Začetek</label>
+            <input name="zacetek" placeholder="Npr. Ljubljana" required>
+          </div>
+
+          <div>
+            <label>Destinacija</label>
+            <input name="destinacija" placeholder="Npr. Maribor" required>
+          </div>
+
+          <div>
+            <label>Datum</label>
+            <input type="date" name="datum" required>
+          </div>
+
+          <div>
+            <label>Čas</label>
+            <input type="time" name="cas" required>
+          </div>
+
+          <div>
+            <label>Cena (€)</label>
+            <input type="number" name="cena" placeholder="Npr. 10" required>
+          </div>
+
+          <div>
+            <label>Sedeži</label>
+            <input type="number" name="sedezi" placeholder="Npr. 3" required>
+          </div>
+
+          <div class="full">
+            <label>Telefonska številka</label>
+            <input type="tel" name="telefonska" placeholder="Npr. 041 123 456" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-block primary">Dodaj vožnjo</button>
+        <p id="status" class="muted small" style="margin-top:10px;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+document.getElementById('voznjaForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const statusEl = document.getElementById('status');
+  statusEl.textContent = "Shranjujem...";
+
+  const podatki = Object.fromEntries(new FormData(e.target));
+
+  const res = await fetch('{{ url_for("dodaj_voznjo") }}', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(podatki)
+  });
+
+  const json = await res.json();
+
+  if (json.success) {
+    window.location.href = "{{ url_for('moje_voznje') }}";
+  } else {
+    statusEl.textContent = "Napaka: " + (json.error || "neznano");
+  }
+};
+</script>
+{% endblock %}

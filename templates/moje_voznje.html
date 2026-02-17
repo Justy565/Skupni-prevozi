@@ -1,94 +1,85 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moje vožnje</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f6f6;
-            margin: 0;
-            padding: 20px;
-        }
+{% extends "_layout.html" %}
+{% set title = "Moje vožnje – Skupni prevozi" %}
 
-        h2 {
-            color: #333;
-        }
+{% block content %}
+<section class="page">
+  <div class="wrap">
+    <div class="card">
+      <h2>Moje vožnje</h2>
+      <p class="muted">Tukaj vidiš svoje vožnje. Klikni “Izbriši” za odstranitev.</p>
 
-        .voznja {
-            background: #fff;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+      <div id="voznje-container">
+        <p>Nalaganje voženj...</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        .voznja-info {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
+<script>
+document.addEventListener("DOMContentLoaded", () => naloziVoznje());
 
-        .voznja button {
-            background: #e53935;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+async function naloziVoznje() {
+  const container = document.getElementById('voznje-container');
+  container.innerHTML = '<p>Nalaganje voženj...</p>';
 
-        .voznja button:hover {
-            background: #c62828;
-        }
+  try {
+    const res = await fetch('/api/moje_voznje');
+    const data = await res.json();
+    container.innerHTML = '';
 
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #2196f3;
-        }
+    if (data.success && data.voznje.length > 0) {
+      const list = document.createElement('ul');
 
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <h2>Izbris</h2>
+      data.voznje.forEach(v => {
+        const item = document.createElement('li');
 
-    {% if voznje %}
-        {% for voznja in voznje %}
-            <div class="voznja">
-                <div class="voznja-info">
-                    {{ voznja['zacetek'] }} → {{ voznja['destinacija'] }}<br>
-                    Datum: {{ voznja['datum'] }} ob {{ voznja['cas'] }}<br>
-                    Cena: €{{ voznja['cena'] }} | Št. mest: {{ voznja['sedezi'] }}
-                </div>
-                <button onclick="izbrisiVoznjo('{{ voznja.doc_id }}')">Izbriši</button>
-
+        item.innerHTML = `
+          <div class="ride-row">
+            <div class="ride-main">
+              <div class="ride-title">
+                <strong>${esc(v.zacetek)}</strong> → <strong>${esc(v.destinacija)}</strong>
+              </div>
+              <div class="ride-meta">
+                Datum: ${esc(v.datum)} ob ${esc(v.cas)} • Sedeži: ${esc(String(v.sedezi))} • Cena: ${esc(String(v.cena))} €
+                <br>Telefon: ${esc(v.telefonska || '')}
+              </div>
             </div>
-        {% endfor %}
-    {% else %}
-        <p>Ni dodanih voženj.</p>
-    {% endif %}
 
-    <a href="{{ url_for('index') }}">← Nazaj</a>
+            <div class="ride-actions">
+              <button class="danger" onclick="izbrisiVoznjo(${v.doc_id})">Izbriši</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
 
-    <script>
-        async function izbrisiVoznjo(id) {
-            if (!confirm("Ali res želiš izbrisati to vožnjo?")) return;
-            const res = await fetch(`/izbrisi_voznjo/${id}`, {
-                method: 'POST'
-            });
-            const json = await res.json();
-            if (json.success) {
-                location.reload();
-            } else {
-                alert("Napaka: " + json.error);
-            }
-        }
-    </script>
-</body>
-</html>
+      container.appendChild(list);
+    } else {
+      container.innerHTML = '<p>Trenutno še nimaš vnešenih voženj.</p>';
+    }
+  } catch (e) {
+    console.error(e);
+    container.innerHTML = '<p>Napaka pri nalaganju.</p>';
+  }
+}
+
+async function izbrisiVoznjo(id) {
+  if (!confirm("Ali res želiš izbrisati to vožnjo?")) return;
+
+  const res = await fetch(`/izbrisi_voznjo/${id}`, { method: 'POST' });
+  const json = await res.json();
+
+  if (json.success) naloziVoznje();
+  else alert("Napaka: " + (json.error || "neznano"));
+}
+
+function esc(s){
+  return String(s ?? '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+</script>
+{% endblock %}

@@ -1,36 +1,33 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <title>Vse vožnje drugih</title>
-    <link rel="stylesheet" href="static/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Vožnje drugih uporabnikov</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">Domov</a>
-            <a href="{{ url_for('dodaj_voznjo') }}">Dodaj vožnjo</a>
-            <a href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
-            <a href="{{ url_for('logout') }}">Odjava</a>
-        </nav>
-    </header>
-    <main>
-        {% if voznje %}
-            <ul>
-                {% for voznja in voznje %}
-                    <li>
-                        <strong>{{ voznja['zacetek'] }}</strong> → <strong>{{ voznja['destinacija'] }}</strong> dne <strong>{{ voznja['datum'] }}</strong><br>
-                        Št. sedežev: {{ voznja['sedezi'] }}<br>
-                        Cena: <strong>{{ voznja['cena'] }} €</strong><br>
-                        Telefon: <strong>{{ voznja['telefonska'] }}</strong>
-                    </li>
-                    <hr>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Trenutno ni vnosov drugih uporabnikov.</p>
-        {% endif %}
-    </main>
-</body>
-</html>
+{% extends "_layout.html" %}
+{% set title = "Vožnje drugih – Skupni prevozi" %}
+
+{% block content %}
+<section class="page">
+  <div class="wrap">
+    <div class="card">
+      <h2>Vožnje drugih uporabnikov</h2>
+      <p class="muted">Spodaj so objavljene vožnje drugih uporabnikov.</p>
+
+      {% if voznje %}
+        <ul>
+          {% for v in voznje %}
+            <li>
+              <div class="ride-title">
+                <strong>{{ v['zacetek'] }}</strong> → <strong>{{ v['destinacija'] }}</strong>
+              </div>
+              <div class="ride-meta">
+                Datum: {{ v['datum'] }} ob {{ v['cas'] }}<br>
+                Št. sedežev: {{ v['sedezi'] }}<br>
+                Cena: <strong>{{ v['cena'] }} €</strong><br>
+                Telefon: <strong>{{ v['telefonska'] }}</strong>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Trenutno ni vnosov drugih uporabnikov.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

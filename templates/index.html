@@ -1,58 +1,30 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <title>Moje vožnje</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Dobrodošel, {{ session['username'] }}!</h1>
-        <nav>
-            <a href="{{ url_for('dodaj_voznjo') }}">Dodaj vožnjo</a>
-            <a href="{{ url_for('index') }}">Moje vožnje</a>
-            <a href="{{ url_for('vse_voznje') }}">Vožnje drugih</a>
-            <a href="{{ url_for('logout') }}">Odjava</a>
-        </nav>
-    </header>
-    <main>
-        <p>Seznam vaših voženj:</p>
-        <div id="voznje-container">
-            <p>Nalaganje voženj...</p>
-        </div>
-    </main>
+{% extends "_layout.html" %}
+{% set title = "Nadzorna plošča – Skupni prevozi" %}
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('/api/moje_voznje')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('voznje-container');
-                    container.innerHTML = ''; // Počisti prejšnje
+{% block content %}
+<section class="page">
+  <div class="wrap">
+    <div class="card">
+      <h2>Živjo, {{ session['username'] }} 👋</h2>
+      <p class="muted">Hitre povezave:</p>
 
-                    if (data.success && data.voznje.length > 0) {
-                        const list = document.createElement('ul');
-                        data.voznje.forEach(v => {
-                            const item = document.createElement('li');
-                            item.innerHTML = `
-                                <strong>${v.zacetek}</strong> → <strong>${v.destinacija}</strong><br>
-                                Datum: ${v.datum}<br>
-                                Sedeži: ${v.sedezi}<br>
-                                Cena: ${v.cena ?? 'ni določeno'} €<br>
-                                Telefon: ${v.telefonska ?? 'ni vnešena'}
-                            `;
-                            list.appendChild(item);
-                        });
-                        container.appendChild(list);
-                    } else {
-                        container.innerHTML = '<p>Trenutno še nimate vnešenih voženj.</p>';
-                    }
-                })
-                .catch(err => {
-                    document.getElementById('voznje-container').innerHTML = '<p>Napaka pri nalaganju voženj.</p>';
-                    console.error(err);
-                });
-        });
-    </script>
-</body>
-</html>
+      <div class="grid">
+        <a class="big-card" href="{{ url_for('dodaj_voznjo') }}">
+          <h3>➕ Dodaj vožnjo</h3>
+          <p class="muted">Objavi novo vožnjo z vsemi podatki.</p>
+        </a>
+
+        <a class="big-card" href="{{ url_for('moje_voznje') }}">
+          <h3>📋 Moje vožnje</h3>
+          <p class="muted">Pregled in izbris svojih voženj.</p>
+        </a>
+
+        <a class="big-card" href="{{ url_for('vse_voznje') }}">
+          <h3>🔎 Vožnje drugih</h3>
+          <p class="muted">Poišči prevoz in kontaktiraj voznika.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
