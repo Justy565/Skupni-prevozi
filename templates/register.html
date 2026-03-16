@@ -1,61 +1,44 @@
 {% extends "_layout.html" %}
-{% set title = "Registracija – Skupni prevozi" %}
+
+{% block title %}Registracija{% endblock %}
 
 {% block content %}
-<section class="page">
-  <div class="wrap">
-    <div class="card form-card">
-      <h2>Registracija</h2>
-      <p class="muted">Ustvari račun in začni uporabljati storitev.</p>
+<section class="page-section">
+    <div class="form-card">
+        <h2>Registracija</h2>
+        <p class="page-text">Ustvari račun in začni uporabljati spletno stran.</p>
 
-      <div id="error-message" class="alert error" style="display:none;"></div>
+        <div id="error-message" class="error-message"></div>
 
-      <label for="username">Uporabniško ime</label>
-      <input type="text" id="username" name="username" autocomplete="username" required>
+        <label>Uporabniško ime</label>
+        <input type="text" id="username">
 
-      <label for="password">Geslo</label>
-      <input type="password" id="password" name="password" autocomplete="new-password" required>
+        <label>Geslo</label>
+        <input type="password" id="password">
 
-      <button class="btn-block" onclick="register()">Registriraj</button>
-
-      <p class="muted small">
-        Že imaš račun? <a href="{{ url_for('login') }}">Prijavi se</a>
-      </p>
+        <button onclick="registerUser()">Registriraj se</button>
     </div>
-  </div>
 </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function register() {
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const errorMessage = document.getElementById('error-message');
+function registerUser() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const error = document.getElementById("error-message");
 
-  if (!username || !password) {
-    errorMessage.textContent = 'Uporabniško ime in geslo sta obvezna!';
-    errorMessage.style.display = 'block';
-    return;
-  }
-
-  $.ajax({
-    url: '/register',
-    type: 'POST',
-    data: { username, password },
-    dataType: 'json',
-    success: function(res) {
-      if (res.success) window.location.href = '/login';
-      else {
-        errorMessage.textContent = res.error || 'Napaka';
-        errorMessage.style.display = 'block';
-      }
-    },
-    error: function(xhr) {
-      errorMessage.textContent = 'Prišlo je do napake. Poskusi znova.';
-      errorMessage.style.display = 'block';
-      console.error(xhr.responseText);
-    }
-  });
+    $.ajax({
+        url: "/register",
+        type: "POST",
+        data: { username: username, password: password },
+        success: function(res) {
+            if (res.success) {
+                window.location.href = "/login";
+            } else {
+                error.innerText = res.error;
+            }
+        }
+    });
 }
 </script>
 {% endblock %}

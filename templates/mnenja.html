@@ -1,0 +1,49 @@
+{% extends "_layout.html" %}
+
+{% block title %}Mnenja{% endblock %}
+
+{% block content %}
+<section class="reviews">
+    <div class="container">
+        <h2>Mnenja uporabnikov</h2>
+
+        <blockquote>
+            "Stran je zelo pregledna in preprosta za uporabo."
+            <strong>— Tanja</strong>
+        </blockquote>
+
+        <blockquote>
+            "Zelo hitro sem našel prevoz. Sistem je enostaven."
+            <strong>— David</strong>
+        </blockquote>
+
+        <blockquote>
+            "Dodajanje vožnje je hitro in pregledno. Zelo uporabno."
+            <strong>— Luka</strong>
+        </blockquote>
+    </div>
+</section>
+
+<section class="mnenje-forma-sekcija">
+    <div class="container">
+        <h3>Oddaj svoje mnenje</h3>
+
+        <form class="mnenje-form">
+            <label for="ime">Tvoje ime:</label>
+            <input type="text" id="ime" name="ime" required>
+
+            <label for="storitev">O kateri storitvi:</label>
+            <select id="storitev" name="storitev">
+                <option value="dodajanje">Dodajanje vožnje</option>
+                <option value="iskanje">Iskanje vožnje</option>
+                <option value="stran">Pregled strani</option>
+            </select>
+
+            <label for="mnenje">Mnenje:</label>
+            <textarea id="mnenje" name="mnenje" rows="5" required></textarea>
+
+            <button type="submit">Pošlji</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

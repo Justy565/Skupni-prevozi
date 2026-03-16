@@ -1,0 +1,29 @@
+{% extends "_layout.html" %}
+
+{% block title %}Kontakt{% endblock %}
+
+{% block content %}
+<section class="kontakt-hero">
+    <div class="container">
+        <h2>Kontaktirajte nas</h2>
+        <p>Imate vprašanje ali predlog? Veselimo se vašega sporočila!</p>
+    </div>
+</section>
+
+<section class="kontakt-vsebina">
+    <div class="container">
+        <form class="contact-form">
+            <label for="name">Ime in priimek</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-pošta</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Sporočilo</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button type="submit" class="btn-form">Pošlji sporočilo</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

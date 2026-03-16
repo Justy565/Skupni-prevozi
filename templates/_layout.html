@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ title if title else "Skupni prevozi" }}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Skupni prevozi{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap topbar-inner">
+<div class="site-wrapper">
 
-    <a class="brand" href="{{ url_for('home') }}">
-      <img class="brand-logo" src="{{ url_for('static', filename='logo.png') }}" alt="Skupni prevozi">
-      <span class="brand-name">Skupni prevozi</span>
-    </a>
+    <header class="topbar">
+        <div class="container navbar">
+            <a href="{{ url_for('home') }}" class="logo-box">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Skupni prevozi" class="logo">
+                <span>Skupni prevozi</span>
+            </a>
 
-    <!-- Mobile menu button -->
-    <button class="menu-btn" id="menuBtn" aria-label="Odpri meni">☰</button>
+            <nav class="nav-links">
+                {% if session.get('user_id') %}
+                    <a href="{{ url_for('index') }}">Domov</a>
+                    <a href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
+                    <a href="{{ url_for('vse_voznje') }}">Vožnje drugih</a>
+                    <a href="{{ url_for('kontakt') }}">Kontakt</a>
+                    <a href="{{ url_for('mnenja') }}">Mnenja</a>
+                    <a href="{{ url_for('dodaj_voznjo') }}" class="btn-nav">Dodaj vožnjo</a>
+                    <a href="{{ url_for('logout') }}">Odjava</a>
+                {% else %}
+                    <a href="{{ url_for('kontakt') }}">Kontakt</a>
+                    <a href="{{ url_for('mnenja') }}">Mnenja</a>
+                    <a href="{{ url_for('login') }}">Prijava</a>
+                    <a href="{{ url_for('register') }}" class="btn-nav">Registracija</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
 
-    <nav class="topnav" id="topNav">
-      {% if session.get('user_id') %}
-        <a class="topnav-link" href="{{ url_for('index') }}">Domov</a>
-        <a class="topnav-link" href="{{ url_for('moje_voznje') }}">Moje vožnje</a>
-        <a class="topnav-link" href="{{ url_for('vse_voznje') }}">Vožnje drugih</a>
-        <a class="topnav-link topnav-cta" href="{{ url_for('dodaj_voznjo') }}">Dodaj vožnjo</a>
-        <a class="topnav-link" href="{{ url_for('logout') }}">Odjava</a>
-      {% else %}
-        <a class="topnav-link" href="{{ url_for('login') }}">Prijava</a>
-        <a class="topnav-link topnav-cta" href="{{ url_for('register') }}">Registracija</a>
-      {% endif %}
-    </nav>
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
 
-  </div>
-</header>
+    <footer class="footer">
+        <ul class="social-icon">
+            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+        </ul>
 
-<main>
-  {% block content %}{% endblock %}
-</main>
+        <ul class="footer-menu">
+            <li><a href="{{ url_for('home') }}">Domov</a></li>
+            <li><a href="{{ url_for('kontakt') }}">Kontakt</a></li>
+            <li><a href="{{ url_for('mnenja') }}">Mnenja</a></li>
+        </ul>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <span class="muted">© {{ datetime.utcnow().year }} Skupni prevozi</span>
-  </div>
-</footer>
+        <p>© 2025 Skupni prevozi | Vse pravice pridržane</p>
+    </footer>
 
-<script>
-  // simple responsive menu
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('topNav');
-  if (btn && nav) {
-    btn.addEventListener('click', () => nav.classList.toggle('open'));
-  }
-</script>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>

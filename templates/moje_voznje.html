@@ -1,85 +1,67 @@
 {% extends "_layout.html" %}
-{% set title = "Moje vožnje – Skupni prevozi" %}
+
+{% block title %}Moje vožnje{% endblock %}
 
 {% block content %}
-<section class="page">
-  <div class="wrap">
-    <div class="card">
-      <h2>Moje vožnje</h2>
-      <p class="muted">Tukaj vidiš svoje vožnje. Klikni “Izbriši” za odstranitev.</p>
-
-      <div id="voznje-container">
-        <p>Nalaganje voženj...</p>
-      </div>
+<section class="page-section">
+    <div class="container">
+        <div class="dashboard-card">
+            <h2>Moje vožnje</h2>
+            <p class="page-text">Tukaj vidiš svoje vožnje.</p>
+            <div id="voznje-container">Nalaganje...</div>
+        </div>
     </div>
-  </div>
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => naloziVoznje());
+function esc(text) {
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+}
 
 async function naloziVoznje() {
-  const container = document.getElementById('voznje-container');
-  container.innerHTML = '<p>Nalaganje voženj...</p>';
-
-  try {
-    const res = await fetch('/api/moje_voznje');
+    const res = await fetch("/api/moje_voznje");
     const data = await res.json();
-    container.innerHTML = '';
+
+    const container = document.getElementById("voznje-container");
+    container.innerHTML = "";
 
     if (data.success && data.voznje.length > 0) {
-      const list = document.createElement('ul');
-
-      data.voznje.forEach(v => {
-        const item = document.createElement('li');
-
-        item.innerHTML = `
-          <div class="ride-row">
-            <div class="ride-main">
-              <div class="ride-title">
-                <strong>${esc(v.zacetek)}</strong> → <strong>${esc(v.destinacija)}</strong>
-              </div>
-              <div class="ride-meta">
-                Datum: ${esc(v.datum)} ob ${esc(v.cas)} • Sedeži: ${esc(String(v.sedezi))} • Cena: ${esc(String(v.cena))} €
-                <br>Telefon: ${esc(v.telefonska || '')}
-              </div>
-            </div>
-
-            <div class="ride-actions">
-              <button class="danger" onclick="izbrisiVoznjo(${v.doc_id})">Izbriši</button>
-            </div>
-          </div>
-        `;
-        list.appendChild(item);
-      });
-
-      container.appendChild(list);
+        data.voznje.forEach(v => {
+            container.innerHTML += `
+                <div class="ride-card">
+                    <h3>${esc(v.zacetek)} - ${esc(v.destinacija)}</h3>
+                    <p>Datum: ${esc(v.datum)} ob ${esc(v.cas)}</p>
+                    <p>Cena: ${esc(v.cena)} €</p>
+                    <p>Sedeži: ${esc(v.sedezi)}</p>
+                    <p>Telefon: ${esc(v.telefonska)}</p>
+                    <button onclick="izbrisi(${v.doc_id})" class="delete-btn">Izbriši</button>
+                </div>
+            `;
+        });
     } else {
-      container.innerHTML = '<p>Trenutno še nimaš vnešenih voženj.</p>';
+        container.innerHTML = "<p>Trenutno nimaš vnešenih voženj.</p>";
     }
-  } catch (e) {
-    console.error(e);
-    container.innerHTML = '<p>Napaka pri nalaganju.</p>';
-  }
 }
 
-async function izbrisiVoznjo(id) {
-  if (!confirm("Ali res želiš izbrisati to vožnjo?")) return;
+async function izbrisi(id) {
+    if (!confirm("Ali res želiš izbrisati vožnjo?")) return;
 
-  const res = await fetch(`/izbrisi_voznjo/${id}`, { method: 'POST' });
-  const json = await res.json();
+    const res = await fetch("/izbrisi_voznjo/" + id, {
+        method: "POST"
+    });
 
-  if (json.success) naloziVoznje();
-  else alert("Napaka: " + (json.error || "neznano"));
+    const data = await res.json();
+
+    if (data.success) {
+        naloziVoznje();
+    } else {
+        alert(data.error);
+    }
 }
 
-function esc(s){
-  return String(s ?? '')
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'","&#039;");
-}
+naloziVoznje();
 </script>
 {% endblock %}

@@ -1,33 +1,28 @@
 {% extends "_layout.html" %}
-{% set title = "Vožnje drugih – Skupni prevozi" %}
+
+{% block title %}Vožnje drugih{% endblock %}
 
 {% block content %}
-<section class="page">
-  <div class="wrap">
-    <div class="card">
-      <h2>Vožnje drugih uporabnikov</h2>
-      <p class="muted">Spodaj so objavljene vožnje drugih uporabnikov.</p>
+<section class="page-section">
+    <div class="container">
+        <div class="dashboard-card">
+            <h2>Vožnje drugih uporabnikov</h2>
+            <p class="page-text">Spodaj so objavljene vožnje drugih uporabnikov.</p>
 
-      {% if voznje %}
-        <ul>
-          {% for v in voznje %}
-            <li>
-              <div class="ride-title">
-                <strong>{{ v['zacetek'] }}</strong> → <strong>{{ v['destinacija'] }}</strong>
-              </div>
-              <div class="ride-meta">
-                Datum: {{ v['datum'] }} ob {{ v['cas'] }}<br>
-                Št. sedežev: {{ v['sedezi'] }}<br>
-                Cena: <strong>{{ v['cena'] }} €</strong><br>
-                Telefon: <strong>{{ v['telefonska'] }}</strong>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>Trenutno ni vnosov drugih uporabnikov.</p>
-      {% endif %}
+            {% if voznje %}
+                {% for v in voznje %}
+                    <div class="ride-card">
+                        <h3>{{ v['zacetek'] }} - {{ v['destinacija'] }}</h3>
+                        <p>Datum: {{ v['datum'] }} ob {{ v['cas'] }}</p>
+                        <p>Cena: {{ v['cena'] }} €</p>
+                        <p>Sedeži: {{ v['sedezi'] }}</p>
+                        <p>Telefon: {{ v['telefonska'] }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Trenutno ni objavljenih voženj.</p>
+            {% endif %}
+        </div>
     </div>
-  </div>
 </section>
 {% endblock %}

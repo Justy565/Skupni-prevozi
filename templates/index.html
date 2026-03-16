@@ -1,30 +1,31 @@
 {% extends "_layout.html" %}
-{% set title = "Nadzorna plošča – Skupni prevozi" %}
+
+{% block title %}Domov{% endblock %}
 
 {% block content %}
-<section class="page">
-  <div class="wrap">
-    <div class="card">
-      <h2>Živjo, {{ session['username'] }} 👋</h2>
-      <p class="muted">Hitre povezave:</p>
+<section class="page-section">
+    <div class="container">
+        <div class="dashboard-card">
+            <h2>Pozdravljen, {{ session['username'] }}</h2>
+            <p class="page-text">Izberi, kaj želiš narediti.</p>
 
-      <div class="grid">
-        <a class="big-card" href="{{ url_for('dodaj_voznjo') }}">
-          <h3>➕ Dodaj vožnjo</h3>
-          <p class="muted">Objavi novo vožnjo z vsemi podatki.</p>
-        </a>
+            <div class="dashboard-grid">
+                <a href="{{ url_for('dodaj_voznjo') }}" class="dashboard-item">
+                    <h3>Dodaj vožnjo</h3>
+                    <p>Objavi novo vožnjo z vsemi podatki.</p>
+                </a>
 
-        <a class="big-card" href="{{ url_for('moje_voznje') }}">
-          <h3>📋 Moje vožnje</h3>
-          <p class="muted">Pregled in izbris svojih voženj.</p>
-        </a>
+                <a href="{{ url_for('moje_voznje') }}" class="dashboard-item">
+                    <h3>Moje vožnje</h3>
+                    <p>Preglej in izbriši svoje vožnje.</p>
+                </a>
 
-        <a class="big-card" href="{{ url_for('vse_voznje') }}">
-          <h3>🔎 Vožnje drugih</h3>
-          <p class="muted">Poišči prevoz in kontaktiraj voznika.</p>
-        </a>
-      </div>
+                <a href="{{ url_for('vse_voznje') }}" class="dashboard-item">
+                    <h3>Vožnje drugih</h3>
+                    <p>Poglej ponudbe drugih uporabnikov.</p>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 {% endblock %}
