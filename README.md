@@ -1,8 +1,7 @@
 # Skupni prevozi – Platforma za deljenje prevozov
 
-## POSLOVNI DEL (30%)
 
-### 1. Identifikacija problema in opis rešitve (5 točk)
+### 1. Identifikacija problema in opis rešitve
 
 **Problem:**  
 Veliko ljudi se vsak dan vozi na podobne relacije (služba, šola, dogodki), vendar avtomobile pogosto uporabljajo sami. To povzroča prometne zastoje, povečano porabo goriva in dodatne stroške.
@@ -15,7 +14,7 @@ Dijaki, študenti, zaposleni in vsi, ki redno opravljajo podobne poti in želijo
 
 ---
 
-### 2. Analiza trga (5 točk)
+### 2. Analiza trga
 
 **Velikost trga:**  
 Veliko ljudi se dnevno vozi na podobne lokacije, kar predstavlja veliko priložnost za uporabo takšne platforme.
@@ -28,7 +27,7 @@ Veliko ljudi se dnevno vozi na podobne lokacije, kar predstavlja veliko priložn
 
 ---
 
-### 3. SWOT analiza (5 točk)
+### 3. SWOT analiza
 
 **PREDNOSTI (S):**
 - Enostavno dodajanje in iskanje voženj
@@ -49,7 +48,7 @@ Veliko ljudi se dnevno vozi na podobne lokacije, kar predstavlja veliko priložn
 
 ---
 
-### 4. Poslovni model in finančni plan (5 točk)
+### 4. Poslovni model in finančni plan
 
 **Prihodki:**
 - Aplikacija je brezplačna, v prihodnosti možna uvedba oglaševanja ali naročnin za dodatne funkcije (npr. prioritetno prikazovanje voženj).
@@ -64,15 +63,14 @@ Veliko ljudi se dnevno vozi na podobne lokacije, kar predstavlja veliko priložn
 
 ---
 
-### 5. Pitch predstavitev (10 točk)
+### 5. Pitch predstavitev
 
 Predstavitev bo prikazala, kako lahko uporabnik doda svojo vožnjo, pregleda vožnje drugih in kontaktira sopotnike. Poudarek bo na enostavni uporabi, varčnosti in ekološki vrednosti.
 
 ---
 
-## TEHNIČNI DEL (70%)
 
-### 1. Flask osnove (15 točk)
+### 1. Flask osnove
 
 - Uporaba Flask frameworka z dobro strukturo projekta (views, templates, static, forms)
 - Prijava, registracija, odjava in zaščita poti (login required)
@@ -82,7 +80,7 @@ Predstavitev bo prikazala, kako lahko uporabnik doda svojo vožnjo, pregleda vo�
 
 ---
 
-### 2. Uporabniški sistem (20 točk)
+### 2. Uporabniški sistem
 
 - Registracija, prijava in odjava z uporabo sej (session)
 - Preverjanje edinstvenosti uporabniškega imena
@@ -91,7 +89,7 @@ Predstavitev bo prikazala, kako lahko uporabnik doda svojo vožnjo, pregleda vo�
 
 ---
 
-### 3. Interakcija z bazo (25 točk)
+### 3. Interakcija z bazo
 
 - Uporaba TinyDB za shranjevanje uporabnikov in voženj
 - Možnost dodajanja voženj s podatki (začetek, destinacija, datum, ura, cena, telefonska)
@@ -100,11 +98,7 @@ Predstavitev bo prikazala, kako lahko uporabnik doda svojo vožnjo, pregleda vo�
 
 ---
 
-### 4. API in AJAX (10 točk)
 
-- API endpoint za `GET /api/moje_voznje`, ki vrača uporabnikove vožnje v JSON formatu
-- AJAX uporabljen na strani za dinamično nalaganje voženj (brez ponovnega nalaganja strani)
-- Prikaz napak (npr. če ni voženj ali je napaka pri klicu)
 
 ---
 
